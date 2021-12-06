@@ -19,11 +19,5 @@ for day in range(256):
     newborn = 0
 print(sum(ocean))
 
-def sum(array):
-    sum = 0
-    for item in array:
-        sum += int(item)
-    return sum
-
 #Main concept : linearisation into a size-9 array instead of counting ALL the fishes
 #Spent time : 2h+
