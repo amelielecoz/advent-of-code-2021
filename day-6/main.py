@@ -3,34 +3,27 @@ with open("input.txt", "r") as fp:
 lines = [i.split("\n")[0] for i in lines]
 school = lines[0].split(',')
 
-class Fish:
-    def __init__(self, timer):
-        self.timer = timer
-        self.hasBaby = False
+ocean = [0] * 9
 
-    def live(self):
-        if(self.timer == 0):
-            self.hasBaby = True
-            self.initTimer()
-        else:
-            self.timer -= 1
-
-    def initTimer(self):
-        self.timer = 6
-
-    def resetHasBaby(self):
-        self.hasBaby = False
-
-fishes = []
 for individual in school:
-    fish = Fish(int(individual))
-    fishes.append(fish)
+    ocean[int(individual)] +=1
 
+newborn = 0
 for day in range(256):
-    for fish in fishes:
-        fish.live()
-        if (fish.hasBaby == True):
-            fishes.append(Fish(9))
-            fish.resetHasBaby()
+    newborn = ocean[0]
+    for x in range(len(ocean)):
+        if(x > 0):
+            ocean[x-1] = ocean[x]
+    ocean[6] += newborn
+    ocean[8] = newborn
+    newborn = 0
+print(sum(ocean))
 
-print(f'Solution 1 : {len(fishes)}')
+def sum(array):
+    sum = 0
+    for item in array:
+        sum += int(item)
+    return sum
+
+#Main concept : linearisation into a size-9 array instead of counting ALL the fishes
+#Spent time : 2h+
